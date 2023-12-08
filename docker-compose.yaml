@@ -1,0 +1,18 @@
+version: '1'
+
+services:
+  api:
+    build: ./backend
+    command: sh -c "uvicorn main:app --reload --port=8000 --host=0.0.0.0"
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend:/app/backend
+  frontend:
+    build: ./frontend/cutCalcMatherial
+    command: npm run dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend/cutCalcMatherial:/app/frontend
+      - /app/frontend/node_modules/
