@@ -99,8 +99,8 @@ const CutPositionsCanvas = ({length, cutPositions, index}) => {
             subCtx.fillStyle = 'black';
 
             const centerTextX = (xPos + prevXPos) / 2;
-            ctx.fillText(cutPosition.toString(), centerTextX - 8, canvas.height - 17);
-            subCtx.fillText(idx > 0 ? (cutPosition - cutPositions[idx - 1]).toString() : cutPosition.toString(), xPos - 50, canvas.height - 10);
+            subCtx.fillText(cutPosition.toString(), centerTextX - 8, canvas.height - 17);
+            ctx.fillText(idx > 0 ? (cutPosition - cutPositions[idx - 1]).toString() : cutPosition.toString(), xPos - 50, canvas.height - 10);
 
 
             if (idx === cutPositions.length - 1) {
