@@ -1,5 +1,23 @@
 import React, {useEffect} from 'react';
-import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from '@mui/material';
+import {
+    Paper,
+    styled,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Typography
+} from '@mui/material';
+
+const StyledTableCell = styled(TableCell)({
+    border: '2px solid #bbc3c2',
+    borderRadius: 0,
+    padding: '10px',
+    paddingLeft: '30px',
+    paddingRight: '30px',
+});
 
 const PipesTableComponent = ({data, title}) => {
     return (
@@ -9,18 +27,18 @@ const PipesTableComponent = ({data, title}) => {
             </Typography>
             <Table>
                 <TableHead>
-                    <TableRow>
-                        <TableCell>Длина</TableCell>
-                        <TableCell>Количество</TableCell>
-                        <TableCell>Название</TableCell>
+                    <TableRow style={{backgroundColor: '#d1e2e0'}}>
+                        <StyledTableCell>Длина</StyledTableCell>
+                        <StyledTableCell>Количество</StyledTableCell>
+                        <StyledTableCell>Название</StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {data.map((item, index) => (
-                        <TableRow key={index}>
-                            <TableCell>{item.length}</TableCell>
-                            <TableCell>{item.quantity}</TableCell>
-                            <TableCell>{item.name}</TableCell>
+                        <TableRow key={index } style={{backgroundColor: index % 2 === 0 ? '#f0f8ff' : '#d1e2e0'}}>
+                            <StyledTableCell>{item.length}</StyledTableCell>
+                            <StyledTableCell>{item.quantity}</StyledTableCell>
+                            <StyledTableCell>{item.name}</StyledTableCell>
                         </TableRow>
                     ))}
                 </TableBody>
@@ -36,21 +54,21 @@ const NestingTableComponent = ({data, title}) => {
             </Typography>
             <Table>
                 <TableHead>
-                    <TableRow>
-                        <TableCell>Длина</TableCell>
-                        <TableCell>Количество</TableCell>
-                        <TableCell>Точки разреза</TableCell>
+                    <TableRow style={{backgroundColor: '#d1e2e0'}}>
+                        <StyledTableCell>Длина</StyledTableCell>
+                        <StyledTableCell>Количество</StyledTableCell>
+                        <StyledTableCell align="center">Точки разреза</StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {data.map((item, index) => (
-                        <TableRow key={index}>
-                            <TableCell>{item.length}</TableCell>
-                            <TableCell>{item.quantity}</TableCell>
-                            <TableCell> <CutPositionsCanvas length={item.length}
+                        <TableRow key={index} style={{backgroundColor: index % 2 === 0 ? '#f0f8ff' : '#d1e2e0'}}>
+                            <StyledTableCell>{item.length}</StyledTableCell>
+                            <StyledTableCell>{item.quantity}</StyledTableCell>
+                            <StyledTableCell> <CutPositionsCanvas length={item.length}
                                                             cutPositions={item.cut_positions}
                                                             index={index}/>
-                            </TableCell>
+                            </StyledTableCell>
                         </TableRow>
                     ))}
                 </TableBody>
@@ -99,8 +117,8 @@ const CutPositionsCanvas = ({length, cutPositions, index}) => {
             subCtx.fillStyle = 'black';
 
             const centerTextX = (xPos + prevXPos) / 2;
-            subCtx.fillText(cutPosition.toString(), centerTextX - 8, canvas.height - 17);
-            ctx.fillText(idx > 0 ? (cutPosition - cutPositions[idx - 1]).toString() : cutPosition.toString(), xPos - 50, canvas.height - 10);
+            subCtx.fillText(cutPosition.toString(), xPos - 50, canvas.height - 10);
+            ctx.fillText(idx > 0 ? (cutPosition - cutPositions[idx - 1]).toString() : cutPosition.toString(),  centerTextX - 8, canvas.height - 17);
 
 
             if (idx === cutPositions.length - 1) {
